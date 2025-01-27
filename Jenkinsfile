@@ -5,7 +5,7 @@ pipeline{
     stages{
         stage("code"){
             steps{
-                git url: "https://github.com/devopsbytanishka/node-app.git", branch:"main"
+                git url: "https://github.com/mhrjanish/node-app.git", branch:"main"
                 echo 'Code is cloned'
             }
         }
@@ -17,7 +17,7 @@ pipeline{
         }
         stage("Push Img to DockerHub"){
             steps{
-                withCredentials([usernamePassword(credentialsId:"dockerHub",passwordVariable:"dockerHubPass",usernameVariable:"dockerHubUser")]){
+                withCredentials([usernamePassword(credentialsId:"maharjan",passwordVariable:"dockerHubPass",usernameVariable:"dockerHubUser")]){
                     sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPass}"
                     sh "docker tag node-app:latest ${env.dockerHubUser}/node-app:latest"
                     sh "docker push ${env.dockerHubUser}/node-app:latest"
