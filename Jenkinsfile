@@ -17,7 +17,7 @@ pipeline{
         }
         stage("Push Img to DockerHub"){
             steps{
-                withCredentials([usernamePassword(credentialsId:"maharjan",passwordVariable:"dockerHubPass",usernameVariable:"dockerHubUser")]){
+                withCredentials([usernamePassword(credentialsId:"DockerHub",passwordVariable:"dockerHubPass",usernameVariable:"dockerHubUser")]){
                     sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPass}"
                     sh "docker tag node-app:latest ${env.dockerHubUser}/node-app:latest"
                     sh "docker push ${env.dockerHubUser}/node-app:latest"
